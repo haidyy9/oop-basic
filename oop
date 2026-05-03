@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+
+// Base class
+class Student {
+protected:
+    string name;
+    int id;
+    float grade;
+
+public:
+    Student(string n, int i, float g) {
+        name = n;
+        id = i;
+        grade = g;
+    }
+
+    virtual void display() {
+        cout << "Name: " << name << endl;
+        cout << "ID: " << id << endl;
+        cout << "Grade: " << grade << endl;
+    }
+
+    virtual string getStatus() {
+        if (grade >= 50)
+            return "Pass";
+        else
+            return "Fail";
+    }
+};
+
+// Derived class
+class ExcellentStudent : public Student {
+public:
+    ExcellentStudent(string n, int i, float g) : Student(n, i, g) {}
+
+    string getStatus() override {
+        if (grade >= 85)
+            return "Excellent";
+        else
+            return Student::getStatus();
+    }
+};
+
+int main() {
+    Student s1("Ali", 1, 60);
+    ExcellentStudent s2("Mona", 2, 90);
+
+    cout << "Student 1:" << endl;
+    s1.display();
+    cout << "Status: " << s1.getStatus() << endl;
+
+    cout << "\nStudent 2:" << endl;
+    s2.display();
+    cout << "Status: " << s2.getStatus() << endl;
+
+    return 0;
+}
